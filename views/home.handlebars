@@ -1,0 +1,129 @@
+    <!-- Template Home -->
+<div class="bkgd_img">  
+  <header> 
+    <div class="jumbotron head">
+        
+
+          
+          <div class="row" id="home_buttons">
+
+                <div class="col-md-4-offset-3" id="mainbutts">
+                    <ul>
+                        <li><button class="btn btn-primary raised" type="submit" id="login">Login</button></li>
+                        
+                        <li><button class="btn btn-primary raised" type="submit" id="register">Register</button></li>
+                    </ul>
+                </div>
+
+        </div>  
+
+    </div>
+
+  </header>
+</div>
+
+ 
+
+<div class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="myLargeModalLabel" id="loginErr"  data-backdrop="static" title="Invalid Login">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title">Invalid Login</h3>
+          </div>
+          <div class="modal-body" id="loginErrBody">
+            {{loginErr}}
+          </div>
+
+    </div>
+    </div>
+</div>
+
+<!--login modal-->
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="loginModal"  data-backdrop="static">
+		<div class="modal-dialog modal-sm">
+    		<div class="modal-content">
+    			  <div class="modal-header">
+      				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      				<h1 class="modal-title">Login</h1>
+      			</div>
+      			<div class="modal-body">
+        			<form id="loginForm" method="post" action="/login">
+  						<div class="form-group">
+    						<label for="username">Username</label>
+    						<input type="text" class="form-control" id="user" placeholder="JaneDoe" name="username" required>
+ 						  </div>
+  						<div class="form-group">
+    						<label for="password">Password</label>
+    						<input type="password" class="form-control" id="pass" placeholder="Password" name="password" required>
+  						</div>
+  						<input type="submit" class="btn btn-default" id="loginSubmit">
+              </form>
+      			</div>
+
+			</div>
+  		</div>
+	</div><!--end login modal-->
+
+<!--register modal-->
+	<div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="registerModal" data-backdrop="static">
+		<div class="modal-dialog modal-md">
+    		<div class="modal-content">
+    			<div class="modal-header">
+      				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      				<h1 class="modal-title">Register</h1>
+      			</div>
+      			<div class="modal-body">
+        			<form id="regForm" method="post" action="/register">
+              <div class="form-group">
+                <label for="userName">Username</label>
+                <input type="text" class="form-control" id="userName" placeholder="JaneDoe" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+              </div>
+               
+        				 <div class="form-group">
+    						<label for="firstName">First Name</label>
+    						<input type="text" class="form-control" id="firstName" placeholder="Jane" required>
+  						</div>
+  						<div class="form-group">
+    						<label for="lastName">Last Name</label>
+    						<input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+  						</div>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="email@email.com" required>
+            </div>
+              <div class="form-group">
+                <label for="image">Link to Photo</label>
+                <input type="url" class="form-control" id="img">
+              </div>
+              
+              <div class="form-group">
+                <label for="address">Street</label>
+                <input type="text" class="form-control" id="address">
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city">
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state">
+              </div>
+              <div class="form-group">
+                <label for="zip">Zip Code</label>
+                <input type="text" class="form-control" id="zip">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone">
+              </div>
+  						<button type="submit" class="btn btn-default" id="registerSubmit">Submit</button>
+					</form>
+      			</div>
+			</div>
+  		</div>
+	</div><!--end register modal-->
