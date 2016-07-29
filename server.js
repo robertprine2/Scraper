@@ -46,6 +46,9 @@ request("http://generationmeh.com/", function (error, response, html) {
 	// array where information will be placed
 	var result = [];
 
+	// drops the articles collection so that previous inserts don't clog it up with the same posts over and over
+	db.articles.drop();
+
 	// scrapes h1 a tags for titles and urls of articles
 	$('h2').find('a').each(function(i, element) {
 		
@@ -67,12 +70,18 @@ request("http://generationmeh.com/", function (error, response, html) {
 			title: title,
 			url: link, 
 			content: content
-		}); // end of push
+		}); // end of push		
+
 	}); // end of title and url scrape
 	
+	// sends all the results to mongodb articles collection
+	for (var k = 1; k < result.length; k++) {
+		db.articles.insert(result[k]);
+	} // end of for loop
+
 	//routes
 	app.get('/', function(req, res) {
-		res.send("Hello World");
+		res.render('home', {layout: 'main', result: result});
 	});
 
 }); // end of request samdavidson.net
