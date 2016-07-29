@@ -1,3 +1,9 @@
+body {
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
 .whiteBorder {
     border: 3px solid white;
     overflow-wrap: break-word;
@@ -27,4 +33,34 @@
 											  rgba(0, 0, 0, 0.4) 50%,
 											  transparent,
 											  transparent)
+}
+
+.content {
+	text-align: left;
+}
+
+.socIcon {
+	margin: 20px;
+	display: inline-block;
+}
+
+.social {
+	width: 62px;
+	height: 62px;
+	background-color: white;
+}
+
+.social:hover{
+	transition: all 1s ease;
+	-webkit-transform:scale(1.5); 
+    -moz-transform:scale(1.5); 
+    -ms-transform:scale(1.5); 
+    -o-transform:scale(1.5); 
+     transform:scale(1.5);
+     z-index: +10;
+}
+
+footer {
+	text-align: center;
+	padding: 30px;
 }
