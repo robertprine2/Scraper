@@ -9,9 +9,23 @@
             </div>
         {{/each}}
     </div>
-    <div class="col-md-4 whiteBorder scroll">
-        <h4>Comments</h4>
-        <p></p>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 halfSizedWhiteBorder scroll">
+                <h4>Comments</h4>
+                <p></p>
+            </div>
+
+            <div class="col-md-12 halfSizedWhiteBorder scroll">
+                <form id="commentForm">
+                    <div class="form-group">
+                        <label for="seats">Speak Your Mind!</label>
+                        <input type="text" class="form-control" id="comment"  required>
+                    </div>
+
+                    <input type="submit" class="btn btn-danger" id="commentSubmit">
+                </form>
+            </div>
     </div>
 </div>
 

@@ -46,9 +46,6 @@ request("http://generationmeh.com/", function (error, response, html) {
 	// array where information will be placed
 	var result = [];
 
-	// drops the articles collection so that previous inserts don't clog it up with the same posts over and over
-	db.articles.drop();
-
 	// scrapes h1 a tags for titles and urls of articles
 	$('h2').find('a').each(function(i, element) {
 		
@@ -73,16 +70,55 @@ request("http://generationmeh.com/", function (error, response, html) {
 		}); // end of push		
 
 	}); // end of title and url scrape
-	
-	// sends all the results to mongodb articles collection
-	for (var k = 1; k < result.length; k++) {
-		db.articles.insert(result[k]);
-	} // end of for loop
+
+		var k = 0;
+
+		db.articles.find({title: result[k].title}).forEach(function (err, doc) {
+			if(err) throw err;
+			k++;
+			console.log(result[k].title);
+			console.log(doc);
+			// if the article title is already in the collection don't insert it
+			if (doc.title == result[k].title) {
+				console.log("This article is already in the database.")
+			}
+			// else insert the article into the collection
+			else {
+				db.articles.insert(result[k]);
+			}
+
+		}); // end of articles.find title: thisTitle
+		
+		// for (var k = 1; k < result.length; k++) {
+
+		// thisTitle = result[k].title;
+		// console.log(thisTitle);
+		// db.articles.find({title: thisTitle}, function (err, docs) {
+			
+		// 	// if there is no article with thisTitle insert the article into the collection
+		// 	if (err || !docs) db.articles.insert(result[k]);
+			
+		// 	// else the article title is already in the collection don't insert it
+		// 	else console.log("This article is already in the database.");			
+
+		// }); // end of articles.find title: thisTitle
 
 	//routes
 	app.get('/', function(req, res) {
-		res.render('home', {layout: 'main', result: result});
+
+		res.render('home', {
+			layout: 'main', 
+			result: result
+		});
 	});
+
+	app.post('/comment', function(req, res) {
+
+		// post comment to database
+
+		// redirect to homepage?
+
+	}); // end of app.post comment
 
 }); // end of request samdavidson.net
 
