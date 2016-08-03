@@ -11,6 +11,8 @@ var mongojs = require('mongojs');
 var databaseUrl = "scrape";
 var collections = ["articles", "comments"];
 
+//MONGODB_URI: mongodb://heroku_6c11zjj8:9gl21imkkrpqsefq9ctd01n60s@ds139645.mlab.com:39645/heroku_6c11zjj8
+
 // creates a databse in mongo called scrape with two collections: articles and comments
 var db = mongojs('scrape', ['articles', 'comments']);
 
@@ -68,26 +70,53 @@ request("http://generationmeh.com/", function (error, response, html) {
 			url: link, 
 			content: content
 		}); // end of push		
+			
+
+
+		// db.articles.find({},function (err, posts) {
+		// 	// console.log(posts);
+		// 	posts.forEach(function(doc, index, array) {
+				
+		// 		if(err) throw err;
+
+		// 		// if the article title is already in the collection don't insert it
+		// 		result.forEach(function(scrappedResult){
+		// 			if (doc.title == scrappedResult.title) {
+		// 				console.log("This article is already in the database.")
+		// 			} // end if
+		// 			// else insert the article into the collection
+		// 			else {
+		// 				db.articles.insert(scrappedResult);
+		// 				console.log(scrappedResult);
+		// 			} // end else
+		// 		});
+		// 	}); // end forEach
+
+			
+
+		// }); // end of articles.find title: thisTitle
 
 	}); // end of title and url scrape
 
-		var k = 0;
+	for (var i = 0; i < result.length; i++) {
 
-		db.articles.find({title: result[k].title}).forEach(function (err, doc) {
-			if(err) throw err;
-			k++;
-			console.log(result[k].title);
-			console.log(doc);
-			// if the article title is already in the collection don't insert it
-			if (doc.title == result[k].title) {
-				console.log("This article is already in the database.")
-			}
-			// else insert the article into the collection
-			else {
-				db.articles.insert(result[k]);
-			}
+		(function(doc) {
+			db.articles.find({title: doc.title}, function(err, posts) {
+								
+				console.log(err)
+				if (posts.length > 0) {
+					console.log("This article is already in the database.")
+				} // end if
+				// else insert the article into the collection
+				else {
 
-		}); // end of articles.find title: thisTitle
+					db.articles.insert(doc);
+				} // end else
+				
+			}); // end of find titles	
+		})(result[i]);
+
+	} // end of for loop
 		
 		// for (var k = 1; k < result.length; k++) {
 
@@ -112,11 +141,17 @@ request("http://generationmeh.com/", function (error, response, html) {
 		});
 	});
 
-	app.post('/comment', function(req, res) {
+	app.post('/comments', function(req, res) {
 
-		// post comment to database
+		console.log(req.body);
+		var comment = req.body;
 
-		// redirect to homepage?
+		// // update the database with the new comment
+		// db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment}}}, function(err, docs) {
+		// 	if (err) console.log(err);
+		// 	console.log(docs);
+
+		// }); // end db.articles.update()
 
 	}); // end of app.post comment
 

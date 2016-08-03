@@ -1,31 +1,33 @@
+{{#each result}}
 <div class="row">
     <div class="col-md-8 whiteBorder scroll">
-        {{#each result}}
+        
             <div class="postName">
                 <h4><a href="{{url}}">{{title}}</a></h4>
             </div>
             <div class="postContent">
                 <p class="content">{{content}}</p>
             </div>
-        {{/each}}
+       
     </div>
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-12 halfSizedWhiteBorder scroll">
                 <h4>Comments</h4>
-                <p></p>
+                <p class="comments" data-title="{{title}}"></p>
             </div>
 
             <div class="col-md-12 halfSizedWhiteBorder scroll">
-                <form id="commentForm">
+                <form class="commentForm">
                     <div class="form-group">
                         <label for="seats">Speak Your Mind!</label>
-                        <input type="text" class="form-control" id="comment"  required>
+                        <input type="text" class="form-control comment"  data-title="{{title}}" required>
                     </div>
 
-                    <input type="submit" class="btn btn-danger" id="commentSubmit">
+                    <button type="button" class="btn btn-danger commentSubmit" data-title="{{title}}">Submit</button>
                 </form>
             </div>
+        </div>
     </div>
 </div>
-
+{{/each}}
