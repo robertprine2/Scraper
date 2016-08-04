@@ -25,10 +25,10 @@ db.on('error', function(err) {
 app.use(express.static(process.cwd() + '/assets'));
 
 // BodyParser interprets data sent to the server
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.text());
-// app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
 //setting up handlebars
 var exphbs = require('express-handlebars');
@@ -135,23 +135,33 @@ request("http://generationmeh.com/", function (error, response, html) {
 	//routes
 	app.get('/', function(req, res) {
 
-		res.render('home', {
-			layout: 'main', 
-			result: result
-		});
-	});
+		db.articles.find({}, function(err, posts) {
+
+			res.render('home', {
+				layout: 'main', 
+				result: posts
+			}); //end of res.render
+
+		}); // end of db.articles.find
+	}); // end of app.get
 
 	app.post('/comments', function(req, res) {
 
-		console.log(req.body);
 		var comment = req.body;
+		console.log(comment);
 
-		// // update the database with the new comment
-		// db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment}}}, function(err, docs) {
-		// 	if (err) console.log(err);
-		// 	console.log(docs);
 
-		// }); // end db.articles.update()
+
+		// update the database with the new comment
+		db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment}}}, function(err, docs) {
+			if (err) console.log(err);
+			console.log(docs);
+
+			
+
+		}); // end db.articles.update()
+
+		res.redirect('/');
 
 	}); // end of app.post comment
 

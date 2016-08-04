@@ -24,10 +24,10 @@ $(document).ready(function(){
 		$.ajax({
 			type:'POST',
 			url: "/comments",
-			data: app.comment
+			data: app
 		}).done(function(data) {
 
-			console.log(data);
+			// console.log(data);
 		
 		}); // end of ajax post
 
