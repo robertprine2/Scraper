@@ -8,8 +8,8 @@ var app = express();
 
 //requiring and setting up mongo database/collections
 var mongojs = require('mongojs');
-var databaseUrl = "scrape";
-var collections = ["mongodb://heroku_6c11zjj8:9gl21imkkrpqsefq9ctd01n60s@ds139645.mlab.com:39645/heroku_6c11zjj8"];
+var databaseUrl = "mongodb://heroku_6c11zjj8:9gl21imkkrpqsefq9ctd01n60s@ds139645.mlab.com:39645/heroku_6c11zjj8";
+var collections = ["articles", "comments"];
 
 //MONGODB_URI: mongodb://heroku_6c11zjj8:9gl21imkkrpqsefq9ctd01n60s@ds139645.mlab.com:39645/heroku_6c11zjj8
 
