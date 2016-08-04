@@ -15,7 +15,12 @@
             <div class="col-md-12 halfSizedWhiteBorder scroll">
                 <h4>Comments</h4>
                 {{#each comments}}
-                <p class="comments" data-title="{{title}}">{{comment}}</p>
+                <p class="comments" data-title="{{title}}">
+                    <button class="delete" data-comment="{{comment}}">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </button>
+                    {{comment}}      
+                </p>
                 {{/each}}
             </div>
 

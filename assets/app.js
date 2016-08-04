@@ -28,6 +28,7 @@ $(document).ready(function(){
 		}).done(function(data) {
 
 			// console.log(data);
+			location.reload();
 		
 		}); // end of ajax post
 

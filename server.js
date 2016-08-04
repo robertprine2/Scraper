@@ -132,40 +132,52 @@ request("http://generationmeh.com/", function (error, response, html) {
 
 		// }); // end of articles.find title: thisTitle
 
-	//routes
-	app.get('/', function(req, res) {
-
-		db.articles.find({}, function(err, posts) {
-
-			res.render('home', {
-				layout: 'main', 
-				result: posts
-			}); //end of res.render
-
-		}); // end of db.articles.find
-	}); // end of app.get
-
-	app.post('/comments', function(req, res) {
-
-		var comment = req.body;
-		console.log(comment);
-
-
-
-		// update the database with the new comment
-		db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment}}}, function(err, docs) {
-			if (err) console.log(err);
-			console.log(docs);
-
-			
-
-		}); // end db.articles.update()
-
-		res.redirect('/');
-
-	}); // end of app.post comment
-
 }); // end of request samdavidson.net
+
+//routes
+app.get('/', function(req, res) {
+
+	db.articles.find({}, function(err, posts) {
+
+		res.render('home', {
+			layout: 'main', 
+			result: posts
+		}); //end of res.render
+
+	}); // end of db.articles.find
+}); // end of app.get
+
+app.post('/comments', function(req, res) {
+
+	var comment = req.body;
+	console.log(comment);
+
+
+
+	// update the database with the new comment
+	db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment}}}, function(err, docs) {
+		if (err) console.log(err);
+		console.log(docs);
+
+		
+
+	}); // end db.articles.update()
+
+}); // end of app.post comment
+
+app.post('/delete', function(req, res) {
+	
+	// set the comment to delete details in a variable
+	var deleteComment = req.body;
+
+	// delete the comment form the database
+	db.articles.update({"title": comment.dataTitle}, {$pull: {comments: {comment: deleteComment}}}, function(err, docs) {
+
+		console.log(docs);
+
+	}); // end db.articles.update()
+
+}); // end app.post('/delete')
 
 // port for local server to use
 var PORT = process.env.PORT || 3000;
