@@ -16,7 +16,7 @@
                 <h4>Comments</h4>
                 {{#each comments}}
                 <p class="comments" data-title="{{title}}">
-                    <button class="delete" data-comment="{{comment}}">
+                    <button class="delete" data-comment="{{comment}}" data-title="{{title}}">
                         <span class="glyphicon glyphicon-remove-sign"></span>
                     </button>
                     {{comment}}      

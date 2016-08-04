@@ -155,7 +155,7 @@ app.post('/comments', function(req, res) {
 
 
 	// update the database with the new comment
-	db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment}}}, function(err, docs) {
+	db.articles.update({"title": comment.dataTitle}, {$addToSet: {comments: {comment: comment.comment, title: comment.dataTitle}}}, function(err, docs) {
 		if (err) console.log(err);
 		console.log(docs);
 
@@ -169,9 +169,10 @@ app.post('/delete', function(req, res) {
 	
 	// set the comment to delete details in a variable
 	var deleteComment = req.body;
+	console.log(deleteComment);
 
 	// delete the comment form the database
-	db.articles.update({"title": comment.dataTitle}, {$pull: {comments: {comment: deleteComment}}}, function(err, docs) {
+	db.articles.update({"title": deleteComment.dataTitle}, {$pull: {comments: {comment: deleteComment.comment}}}, function(err, docs) {
 
 		console.log(docs);
 

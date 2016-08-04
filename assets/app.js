@@ -9,6 +9,11 @@ $(document).ready(function(){
 		comment: ""
 	} // end of app object
 
+	var deleteComment = {
+		dataTitle: "",
+		comment: ""
+	}
+
 	$('.commentSubmit').on('click',function(){
 			
 		app.dataTitle = ($(this).data("title"));
@@ -17,9 +22,9 @@ $(document).ready(function(){
 		
 		console.log(app.comment);
 
-		$('.comment[data-title="' + app.dataTitle + '"]').val("");
+		// $('.comment[data-title="' + app.dataTitle + '"]').val("");
 
-		$('.comments[data-title="' + app.dataTitle + '"]').append(app.comment);
+		// $('.comments[data-title="' + app.dataTitle + '"]').append(app.comment);
 		//post comment
 		$.ajax({
 			type:'POST',
@@ -28,13 +33,35 @@ $(document).ready(function(){
 		}).done(function(data) {
 
 			// console.log(data);
-			location.reload();
+			
 		
 		}); // end of ajax post
 
+		window.location.reload();
+
 		return false;
 	
-	}); // end of submit register button
+	}); // end of commentSubmit button
+
+	$('.delete').on('click', function() {
+
+		deleteComment.comment = ($(this).data("comment"));
+		deleteComment.dataTitle = ($(this).data("title"));
+		console.log(deleteComment.comment);
+
+		$.ajax({
+			type: 'POST',
+			url: "/delete",
+			data: deleteComment
+		}).done(function(data) {
+
+			console.log(data);
+
+		}); // end of ajax delete post
+
+		window.location.reload();
+
+	}); // end of delete click
 
 }); // end of document.ready function
 
