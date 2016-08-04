@@ -12,9 +12,10 @@ var databaseUrl = "scrape";
 var collections = ["articles", "comments"];
 
 //MONGODB_URI: mongodb://heroku_6c11zjj8:9gl21imkkrpqsefq9ctd01n60s@ds139645.mlab.com:39645/heroku_6c11zjj8
+// 'scrape', ['articles', 'comments'] (other info for non heroku use)
 
 // creates a databse in mongo called scrape with two collections: articles and comments
-var db = mongojs('scrape', ['articles', 'comments']);
+var db = mongojs(process.env.MONGODB_URI);
 
 // lets us know if there is an error with the database if it doesn't turn on
 db.on('error', function(err) {
