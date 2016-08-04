@@ -27,7 +27,12 @@ a:hover {
 	text-decoration: none;
 }
 
-#comment {
+.comments {
+	background-color: #8B1A1A;
+	text-align: left;
+}
+
+.comment {
 	height: 250px;
 }
 
