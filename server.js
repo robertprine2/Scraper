@@ -15,7 +15,7 @@ var collections = ["articles", "comments"];
 // 'scrape', ['articles', 'comments'] (other info for non heroku use)
 
 // creates a databse in mongo called scrape with two collections: articles and comments
-var db = mongojs(process.env.MONGODB_URI);
+var db = mongojs(process.env.MONGODB_URI, ['articles', 'comments']);
 
 // lets us know if there is an error with the database if it doesn't turn on
 db.on('error', function(err) {
